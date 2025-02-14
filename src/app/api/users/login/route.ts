@@ -52,6 +52,8 @@ export async function POST(request: NextRequest) {
                    response.cookies.set("token", token, {  //This is used to set the browser cookie
                      httpOnly: true,
                    });
+
+                   console.log(token)
                   
                    return response
                    
