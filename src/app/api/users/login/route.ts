@@ -3,7 +3,7 @@ import User from "@/models/userModel";
 import { NextResponse, NextRequest } from "next/server"; //Used to send responses
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 connect();
 
 export async function POST(request: NextRequest) {
@@ -53,7 +53,6 @@ export async function POST(request: NextRequest) {
 
     return response;
   } catch (error: any) {
-    /* eslint-disable  @typescript-eslint/no-explicit-any */
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
