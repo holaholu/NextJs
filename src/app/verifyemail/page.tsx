@@ -1,11 +1,11 @@
 "use client"; // This is a client component
 
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import toast from "react-hot-toast";
-import { set } from "mongoose";
+
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 
 export default function VerifyEmailPage() {
   const router = useRouter();
@@ -15,12 +15,12 @@ export default function VerifyEmailPage() {
 
   const verifyEmail = async () => {
     try {
-      const response = await axios.post("/api/users/verifyemail", { token });
+      await axios.post("/api/users/verifyemail", { token });
       setVerified(true);
       router.push("/login");
     } catch (error: any) {
       setError(true);
-      console.log(error.response.data);
+      console.log(error);
     }
   };
 

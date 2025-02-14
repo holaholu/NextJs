@@ -4,45 +4,49 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import toast from "react-hot-toast";
+
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 
 export default function SignupPage() {
-  const router = useRouter(); 
+  const router = useRouter();
   const [user, setUser] = useState({
     email: "",
-    password: "",   
-    username:"",
-  })
+    password: "",
+    username: "",
+  });
 
-  const[buttonDisabled, setButtonDisabled] = useState(false); //control signup
+  const [buttonDisabled, setButtonDisabled] = useState(false); //control signup
   const [loading, setLoading] = useState(false);
 
   const onSignup = async () => {
     try {
-       setLoading(true);
-       const response = await axios.post("/api/users/signup", user);
-       //toast.success("Signup successful");
-       console.log("Signup success", response.data);
-       router.push("/login"); //This will redirect to the login page
-    } catch (error:any) { //Any is used to avoid app errors in case no error is found
-      console.log("Signup failed badly",error.message);
+      setLoading(true);
+      const response = await axios.post("/api/users/signup", user);
+      //toast.success("Signup successful");
+      console.log("Signup success", response.data);
+      router.push("/login"); //This will redirect to the login page
+    } catch (error: any) {
+      //Any is used to avoid app errors in case no error is found
+      console.log("Signup failed badly", error.message);
       //toast.error("Something went wrong");
-    } finally {     //This happens no matter what
+    } finally {
+      //This happens no matter what
       setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
-    if(user.email.length > 0 && user.password.length > 0 && user.username.length > 0){
-      setButtonDisabled(false)
-  
-    }else{
-      setButtonDisabled(true)
-     
+    if (
+      user.email.length > 0 &&
+      user.password.length > 0 &&
+      user.username.length > 0
+    ) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
     }
-  }, [user])
+  }, [user]);
 
-  
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <h1 className="">{loading ? "Processing" : "Signup"}</h1>
@@ -79,7 +83,7 @@ export default function SignupPage() {
         onClick={onSignup}
         className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
       >
-        {buttonDisabled? "No Signup": "Signup"}
+        {buttonDisabled ? "No Signup" : "Signup"}
       </button>
       <Link href="/login">Visit Login Page</Link>
     </div>

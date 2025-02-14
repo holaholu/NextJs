@@ -4,6 +4,7 @@ import { NextResponse, NextRequest } from "next/server"; //Used to send response
 import bcrypt from "bcryptjs";
 import { sendEmail } from "@/helpers/mailer";
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 connect();
 
 export async function POST(request: NextRequest) {
@@ -39,7 +40,6 @@ export async function POST(request: NextRequest) {
       emailType: "VERIFY",
       userId: savedUser._id,
     });
-
 
     return NextResponse.json({
       message: "User created successfully",

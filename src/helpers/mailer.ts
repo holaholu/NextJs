@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 import User from "@/models/userModel";
 import bcrypt from "bcryptjs";
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 export const sendEmail = async ({ email, emailType, userId }: any) => {
   try {
     //create a hashed token
@@ -24,7 +25,7 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
 
     //create a transporter
     // Looking to send emails in production? Check out our Email API/SMTP product!
-    var transport = nodemailer.createTransport({
+    const transport = nodemailer.createTransport({
       host: "sandbox.smtp.mailtrap.io",
       port: 2525,
       auth: {
